@@ -1,10 +1,11 @@
 spring:
+  server.servlet.context-path: /daweb
+  server.port: 8008
   datasource:
-    url: jdbc:mysql://localhost:3307/daweb
-    username: root
-    password: secreta
+    url: jdbc:mysql://localhost:3308/daweb?createDatabaseIfNotExists=true
+    username: admin
+    password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
-
 jpa:
   hibernate:
     dialect: org.hibernate.dialect.MySQL8Dialect
