@@ -14,6 +14,13 @@ public class AlumnoService {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
+    public void deleteById(int id){
+        if(!alumnoRepository.existsById(id)){
+            throw new AlumnoNotFoundException("Alumno con id " + id + " no encontrado.");
+        }
+        alumnoRepository.deleteById(id);
+    }
+
     public List<Alumno> findAll(){
         return this.alumnoRepository.findAll();
         }
