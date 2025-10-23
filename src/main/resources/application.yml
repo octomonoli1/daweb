@@ -3,8 +3,6 @@ server:
     context-path: /daweb
   port: 8008
 spring:
-  server.servlet.context-path: /daweb
-  server.port: 8008
   datasource:
     url: jdbc:mysql://localhost:3308/daweb
     username: root
