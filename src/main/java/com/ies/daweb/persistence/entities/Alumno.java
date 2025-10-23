@@ -13,10 +13,12 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class Alumno {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nombre;
-    private String apellido;
-    private LocalDate FechaNacimiento;
+    private String name;
+    private String surname;
+    private LocalDate birth;
+
 }
