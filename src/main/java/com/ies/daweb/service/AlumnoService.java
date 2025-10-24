@@ -27,7 +27,7 @@ public class AlumnoService {
         }
         alumnoRepository.deleteById(id);
     }
-    
+
     public Alumno create(Alumno alumno) {
     	if (alumno.getFechaNacimiento().isAfter(LocalDate.now())) {
 			throw new AlumnoException("La fecha de Nacimiento debe ser anterior a la de hoy");
@@ -42,6 +42,4 @@ public class AlumnoService {
         return this.alumnoRepository.findById(id).get();
     }
 
-        return alumnoRepository.save(alumno);
     }
-}

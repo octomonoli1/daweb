@@ -36,7 +36,7 @@ public class AlumnoController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
             }
         }
-        
+
         @PostMapping
     	public ResponseEntity<?> create(@RequestBody Alumno alumno) {
             try{
@@ -55,4 +55,5 @@ public class AlumnoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
 }
