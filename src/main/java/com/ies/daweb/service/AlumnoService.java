@@ -48,4 +48,11 @@ public class AlumnoService {
         }
        return this.alumnoRepository.findById(id).get();
     }
+    public List<Alumno> findByName(String nombre) {
+        if (!this.alumnoRepository.existsByNombre(nombre)) {
+            throw new AlumnoNotFoundException("El nombre del alumno que has introducido no se encuentra");
+        }
+        return this.alumnoRepository.findByName(nombre);
+    }
+
 }
