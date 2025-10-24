@@ -6,5 +6,5 @@ import org.springframework.data.repository.ListCrudRepository;
 import java.util.List;
 
 public interface AlumnoRepository extends ListCrudRepository<Alumno,Integer> {
-    List<Alumno> findByName (String nombre);
+    List<Alumno> findByName (String name);
 }

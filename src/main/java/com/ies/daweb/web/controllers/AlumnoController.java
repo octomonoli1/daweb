@@ -35,9 +35,9 @@ public class AlumnoController {
     }
 
     @GetMapping("/nombre/{nombre}")
-    public ResponseEntity<?> findByName(@PathVariable String nombre){
+    public ResponseEntity<?> findByName(@PathVariable String name){
         try{
-            return ResponseEntity.ok(this.alumnoService.findByName(nombre));
+            return ResponseEntity.ok(this.alumnoService.findByName(name));
         }catch (AlumnoNotFoundException ex){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body((ex.getMessage()));
         }

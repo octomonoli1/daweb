@@ -28,11 +28,11 @@ public class AlumnoService {
        return this.alumnoRepository.findById(id).get();
     }
 
-    public List<Alumno> findByName(String nombre) {
-        if (!this.alumnoRepository.existsByNombre(nombre)) {
-            throw new AlumnoNotFoundException("El nombre del alumno que has introducido no se encuentra");
+    public List<Alumno> findByName(String name) {
+        if (!this.alumnoRepository.existsByName(name)) {
+            throw new AlumnoNotFoundException("El hombre del alumno que has introducido no se encuentra");
         }
-        return this.alumnoRepository.findByName(nombre);
+        return this.alumnoRepository.findByName(name);
     }
     
 }
