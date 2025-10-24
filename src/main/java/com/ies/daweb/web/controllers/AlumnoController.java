@@ -1,5 +1,7 @@
 package com.ies.daweb.web.controllers;
 
+import com.ies.daweb.service.AlumnoService;
+import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +18,12 @@ import com.ies.daweb.service.AlumnoService;
 import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
 
 @RestController
-@RequestMapping("/alumnos")
+@RequestMapping("/alumno")
 public class AlumnoController {
 
     @Autowired
     private AlumnoService alumnoService;
-    
+
     @GetMapping
     public ResponseEntity<?> findAll(){
         try{
