@@ -51,4 +51,11 @@ public class AlumnoService {
 
         return alumnoRepository.save(alumno);
     }
+    public Alumno findById(int id){
+        if(!this.alumnoRepository.existsById(id)){
+            throw new AlumnoNotFoundException("El id " + id + "no pertenece a ningun alumno");
+        }
+        return this.alumnoRepository.findById(id).get();
+    }
+
 }

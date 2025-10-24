@@ -64,5 +64,13 @@ public class AlumnoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al crear el alumno: " + e.getMessage());
         }
+    }  @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable int id) {
+        try {
+            return ResponseEntity.ok(this.alumnoService.findById(id));
+        } catch (AlumnoNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 }
+
