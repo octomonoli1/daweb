@@ -17,30 +17,30 @@ public class AlumnoService {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
-    public List<Alumno> findAll() {
-        return alumnoRepository.findAll();
-    }
+    public List<Alumno> findAll(){
+        return this.alumnoRepository.findAll();
+        }
 
-    public void deleteById(int id) {
-        if (!alumnoRepository.existsById(id)) {
+    public void deleteById(int id){
+        if(!alumnoRepository.existsById(id)){
             throw new AlumnoNotFoundException("Alumno con id " + id + " no encontrado.");
         }
         alumnoRepository.deleteById(id);
     }
+    
+    public Alumno create(Alumno alumno) {
+    	if (alumno.getFechaNacimiento().isAfter(LocalDate.now())) {
+			throw new AlumnoException("La fecha de Nacimiento debe ser anterior a la de hoy");
+		}
+    	return this.alumnoRepository.save(alumno);
+    }
 
-    public Alumno createAlumno(Alumno alumno) {
-        if (alumno.getName() == null || alumno.getName().trim().isEmpty()) {
-            throw new AlumnoException("El nombre del alumno no puede estar vacío.");
+    public Alumno findById(int id){
+        if(!this.alumnoRepository.existsById(id)){
+            throw new AlumnoNotFoundException("El id " + id + "no pertenece a ningun alumno");
         }
-        if (alumno.getSurname() == null || alumno.getSurname().trim().isEmpty()) {
-            throw new AlumnoException("El apellido del alumno no puede estar vacío.");
-        }
-        if (alumno.getBirth() == null) {
-            throw new AlumnoException("La fecha de nacimiento es obligatoria.");
-        }
-        if (alumno.getBirth().isAfter(LocalDate.now())) {
-            throw new AlumnoException("La fecha de nacimiento debe ser anterior a la fecha actual.");
-        }
+        return this.alumnoRepository.findById(id).get();
+    }
 
         return alumnoRepository.save(alumno);
     }
