@@ -44,6 +44,15 @@ public class AlumnoController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable int id){
+        try{
+            return ResponseEntity.ok(this.alumnoService.findById(id));
+        }catch (AlumnoNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> createAlumno(@RequestBody Alumno alumno) {
         try {
