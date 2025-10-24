@@ -4,15 +4,12 @@ import com.ies.daweb.service.AlumnoService;
 import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.ies.daweb.persistence.entities.Alumno;
-import com.ies.daweb.service.AlumnoService;
-import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
-
 @RestController
-@RequestMapping("/alumnos")
+@RequestMapping("/alumno")
 public class AlumnoController {
 
     @Autowired
@@ -37,22 +34,17 @@ public class AlumnoController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<?> create(@RequestBody Alumno alumno) {
+    @PostMapping("/create")
+    public ResponseEntity<?> createAlumno(@RequestBody Alumno alumno) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.alumnoService.create(alumno));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable int id) {
-        try {
-            return ResponseEntity.ok(this.alumnoService.findById(id));
+            Alumno nuevoAlumno = alumnoService.createAlumno(alumno);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Alumno creado correctamente con ID: " + nuevoAlumno.getId());
         } catch (AlumnoNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al crear el alumno: " + e.getMessage());
         }
     }
 }
