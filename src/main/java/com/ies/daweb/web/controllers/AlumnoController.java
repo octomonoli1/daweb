@@ -56,5 +56,6 @@ public class AlumnoController {
                     .body("Error al crear el alumno: " + e.getMessage());
         }
     }
+
 }
 
