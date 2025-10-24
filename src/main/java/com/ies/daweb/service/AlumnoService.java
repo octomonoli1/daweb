@@ -11,23 +11,17 @@ public class AlumnoService {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
-<<<<<<< HEAD
     public List<Alumno> findAll() {
         return alumnoRepository.findAll();
     }
 
     public void deleteById(int id) {
         if (!alumnoRepository.existsById(id)) {
-=======
-    public void deleteById(int id){
-        if(!alumnoRepository.existsById(id)){
->>>>>>> fec8df5 (Rama Vanesa y Emilio: Buscar alumno por id)
             throw new AlumnoNotFoundException("Alumno con id " + id + " no encontrado.");
         }
         alumnoRepository.deleteById(id);
     }
 
-<<<<<<< HEAD
     public Alumno createAlumno(Alumno alumno) {
         if (alumno.getName() == null || alumno.getName().trim().isEmpty()) {
             throw new AlumnoException("El nombre del alumno no puede estar vacío.");
@@ -42,16 +36,6 @@ public class AlumnoService {
             throw new AlumnoException("La fecha de nacimiento debe ser anterior a la fecha actual.");
         }
 
-    public Alumno findById(int id){
-        if(!this.alumnoRepository.existsById(id)){
-            throw new AlumnoNotFoundException("El id " + id + "no pertenece a ningun alumno");
-        }
-       return this.alumnoRepository.findById(id).get();
+        return alumnoRepository.save(alumno);
     }
-    public List<Alumno> findByName(String name) {
-        return this.alumnoRepository.findByName(name);
-    }
-
-=======
->>>>>>> fec8df5 (Rama Vanesa y Emilio: Buscar alumno por id)
 }
