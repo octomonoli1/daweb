@@ -1,17 +1,9 @@
 package com.ies.daweb.service;
 
-import java.time.LocalDate;
-import java.util.List;
-
+import com.ies.daweb.persistence.repositories.AlumnoRepository;
+import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ies.daweb.persistence.entities.Alumno;
-import com.ies.daweb.persistence.repositories.AlumnoRepository;
-import com.ies.daweb.service.exceptions.AlumnoException;
-import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
-
-import java.util.List;
 
 @Service
 public class AlumnoService {
@@ -19,17 +11,23 @@ public class AlumnoService {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
+<<<<<<< HEAD
     public List<Alumno> findAll() {
         return alumnoRepository.findAll();
     }
 
     public void deleteById(int id) {
         if (!alumnoRepository.existsById(id)) {
+=======
+    public void deleteById(int id){
+        if(!alumnoRepository.existsById(id)){
+>>>>>>> fec8df5 (Rama Vanesa y Emilio: Buscar alumno por id)
             throw new AlumnoNotFoundException("Alumno con id " + id + " no encontrado.");
         }
         alumnoRepository.deleteById(id);
     }
 
+<<<<<<< HEAD
     public Alumno createAlumno(Alumno alumno) {
         if (alumno.getName() == null || alumno.getName().trim().isEmpty()) {
             throw new AlumnoException("El nombre del alumno no puede estar vacío.");
@@ -54,4 +52,6 @@ public class AlumnoService {
         return this.alumnoRepository.findByName(name);
     }
 
+=======
+>>>>>>> fec8df5 (Rama Vanesa y Emilio: Buscar alumno por id)
 }
