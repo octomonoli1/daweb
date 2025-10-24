@@ -10,6 +10,11 @@ import com.ies.daweb.persistence.entities.Alumno;
 import com.ies.daweb.persistence.repositories.AlumnoRepository;
 import com.ies.daweb.service.exceptions.AlumnoException;
 import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class AlumnoService {
@@ -17,6 +22,16 @@ public class AlumnoService {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
+    public Alumno findById(int idAlumno) {
+        if(!this.alumnoRepository.existsById(idAlumno)) {
+            throw new AlumnoNotFoundException("El alumno con id " + idAlumno +" no existe");
+        }
+        return this.alumnoRepository.findById(idAlumno).get();
+    }
+
+    public List<Alumno> findAll(){
+        return this.alumnoRepository.findAll();
+        }
     public List<Alumno> findAll() {
         return alumnoRepository.findAll();
     }
@@ -41,6 +56,32 @@ public class AlumnoService {
         if (alumno.getBirth().isAfter(LocalDate.now())) {
             throw new AlumnoException("La fecha de nacimiento debe ser anterior a la fecha actual.");
         }
+    public Alumno update(Alumno alumno, int idAlumno) {
+        if (alumno.getId() != idAlumno) {
+            throw new AlumnoException("Los ids no coinciden");
+        }
+        if(!this.alumnoRepository.existsById(idAlumno)) {
+            throw new AlumnoNotFoundException("El alumno con id " + idAlumno + " no existe");
+        }
+        if (alumno.getFechaNacimiento() != null) {
+            throw new AlumnoException("No se puede modificar la fecha de cumpleaños.");
+        }
+
+        Alumno alumnoBD = this.findById(idAlumno);
+        alumnoBD.setNombre(alumno.getNombre());
+        alumnoBD.setApellidos(alumno.getApellidos());
+
+
+        return this.alumnoRepository.save(alumnoBD);
+
+    }
+
+    public Alumno create(Alumno alumno) {
+    	if (alumno.getFechaNacimiento().isAfter(LocalDate.now())) {
+			throw new AlumnoException("La fecha de Nacimiento debe ser anterior a la de hoy");
+		}
+    	return this.alumnoRepository.save(alumno);
+    }
 
         return alumnoRepository.save(alumno);
     }

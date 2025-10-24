@@ -21,7 +21,7 @@ public class AlumnoController {
 
     @Autowired
     private AlumnoService alumnoService;
-    
+
     @GetMapping
     public ResponseEntity<?> findAll(){
         try{
@@ -64,4 +64,37 @@ public class AlumnoController {
                     .body("Error al crear el alumno: " + e.getMessage());
         }
     }
+        @DeleteMapping("/{id}")
+        public ResponseEntity<?> deleteById(@PathVariable int id){
+            try{
+                alumnoService.deleteById(id);
+                return ResponseEntity.ok("Alumno " + id + " eliminado correctamente.");
+            }catch(AlumnoNotFoundException e){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            }
+        }
+
+        @PostMapping
+    	public ResponseEntity<?> create(@RequestBody Alumno alumno) {
+            try{
+                return ResponseEntity.status(HttpStatus.CREATED).body(this.alumnoService.create(alumno));
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            }
+
+    	}
+    @PutMapping("/{idAlumno}")
+    public ResponseEntity<?> update(@PathVariable int idAlumno, @RequestBody Alumno alumno){
+        try {
+            return ResponseEntity.ok(this.alumnoService.update(alumno, idAlumno));
+        }
+        catch(AlumnoNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
+        catch (AlumnoException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
+
+    }
+
 }
