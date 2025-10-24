@@ -11,6 +11,8 @@ import com.ies.daweb.persistence.repositories.AlumnoRepository;
 import com.ies.daweb.service.exceptions.AlumnoException;
 import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
 
+import java.util.List;
+
 @Service
 public class AlumnoService {
 
@@ -48,11 +50,8 @@ public class AlumnoService {
         }
        return this.alumnoRepository.findById(id).get();
     }
-    public List<Alumno> findByName(String nombre) {
-        if (!this.alumnoRepository.existsByNombre(nombre)) {
-            throw new AlumnoNotFoundException("El nombre del alumno que has introducido no se encuentra");
-        }
-        return this.alumnoRepository.findByName(nombre);
+    public List<Alumno> findByName(String name) {
+        return this.alumnoRepository.findByName(name);
     }
 
 }
