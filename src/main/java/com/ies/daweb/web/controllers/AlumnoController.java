@@ -56,4 +56,13 @@ public class AlumnoController {
 
 
 
+        @DeleteMapping("/{id}")
+        public ResponseEntity<?> deleteById(@PathVariable int id){
+            try{
+                alumnoService.deleteById(id);
+                return ResponseEntity.ok("Alumno " + id + " eliminado correctamente.");
+            }catch(AlumnoNotFoundException e){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            }
+        }
 }
