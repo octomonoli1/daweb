@@ -42,9 +42,12 @@ public class AlumnoController {
         }
         
         @PostMapping
-    	public ResponseEntity<Alumno> create(@RequestBody Alumno alumno) {
-
-    		return ResponseEntity.status(HttpStatus.CREATED).body(this.alumnoService.create(alumno));
+    	public ResponseEntity<?> create(@RequestBody Alumno alumno) {
+            try{
+                return ResponseEntity.status(HttpStatus.CREATED).body(this.alumnoService.create(alumno));
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            }
 
     	}
 }
