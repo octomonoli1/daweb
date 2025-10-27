@@ -12,7 +12,7 @@ create table alumnos(
 describe alumnos;
 
 insert into alumnos (name, surname, birth) values
-('Pepe','Sanchez Martin', '2000-01-01'),
+('Pepito','Sanchez Martin', '2000-01-01'),
 ('Maria', 'Sanchez Martin', '2001-02-02'),
 ('Olga','Rodriguez Gonzalez','2002-03-03');
 
