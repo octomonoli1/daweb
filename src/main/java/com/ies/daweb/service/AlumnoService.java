@@ -27,6 +27,19 @@ public class AlumnoService {
         alumnoRepository.deleteById(id);
     }
 
+    //update Xexu y canijo
+    public Alumno update(Alumno alumno, int id) {
+        if (alumno.getId() != id) {
+            throw new IllegalArgumentException("El ID del alumno no coincide con el ID de la ruta.");
+        }
+
+        if (!alumnoRepository.existsById(id)) {
+            throw new AlumnoNotFoundException("Alumno con id " + id + " no encontrado.");
+        }
+
+        return alumnoRepository.save(alumno);
+    }
+
     public Alumno createAlumno(Alumno alumno) {
         if (alumno.getName() == null || alumno.getName().trim().isEmpty()) {
             throw new AlumnoException("El nombre del alumno no puede estar vacío.");
