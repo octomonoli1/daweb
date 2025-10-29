@@ -35,6 +35,7 @@ public class AlumnoService {
         alumnoRepository.deleteById(id);
     }
 
+
     public Alumno updateMA(Alumno alumno, int idAlumno) {
         if (alumno.getId() != idAlumno) {
             throw new AlumnoException("Los ids no coinciden");
