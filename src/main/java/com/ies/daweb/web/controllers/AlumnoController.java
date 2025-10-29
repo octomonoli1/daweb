@@ -31,23 +31,37 @@ public class AlumnoController {
         }
     }
 
-        @DeleteMapping("/{id}")
-        public ResponseEntity<?> deleteById(@PathVariable int id){
-            try{
-                alumnoService.deleteById(id);
-                return ResponseEntity.ok("Alumno " + id + " eliminado correctamente.");
-            }catch(AlumnoNotFoundException e){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-            }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable int id){
+        try{
+            alumnoService.deleteById(id);
+            return ResponseEntity.ok("Alumno " + id + " eliminado correctamente.");
+        }catch(AlumnoNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        
-        @PostMapping
-    	public ResponseEntity<?> create(@RequestBody Alumno alumno) {
-            try{
-                return ResponseEntity.status(HttpStatus.CREATED).body(this.alumnoService.create(alumno));
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-            }
+    }
 
-    	}
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody Alumno alumno) {
+        try{
+            return ResponseEntity.status(HttpStatus.CREATED).body(this.alumnoService.createAlumno(alumno));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<?> createAlumno(@RequestBody Alumno alumno) {
+        try {
+            Alumno nuevoAlumno = alumnoService.createAlumno(alumno);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Alumno creado correctamente con ID: " + nuevoAlumno.getId());
+        } catch (AlumnoNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al crear el alumno: " + e.getMessage());
+        }
+    }
 }
