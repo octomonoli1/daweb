@@ -1,5 +1,6 @@
 package com.ies.daweb.web.controllers;
 
+import com.ies.daweb.persistence.entities.Alumno;
 import com.ies.daweb.service.AlumnoService;
 import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

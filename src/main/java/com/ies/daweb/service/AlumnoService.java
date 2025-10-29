@@ -1,9 +1,14 @@
 package com.ies.daweb.service;
 
+import com.ies.daweb.persistence.entities.Alumno;
 import com.ies.daweb.persistence.repositories.AlumnoRepository;
+import com.ies.daweb.service.exceptions.AlumnoException;
 import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class AlumnoService {
@@ -35,7 +40,14 @@ public class AlumnoService {
         if (alumno.getBirth().isAfter(LocalDate.now())) {
             throw new AlumnoException("La fecha de nacimiento debe ser anterior a la fecha actual.");
         }
-
         return alumnoRepository.save(alumno);
+    }
+
+    public List<Alumno> findById(int idAlumno) {
+        if (this.alumnoRepository.existsById(idAlumno)) {
+            return this.alumnoRepository.findById(idAlumno);
+        }else {
+            throw new AlumnoNotFoundException("No se encuentra el alumno asignado");
+        }
     }
 }
