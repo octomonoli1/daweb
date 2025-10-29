@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import com.ies.daweb.persistence.entities.Alumno;
 import com.ies.daweb.service.AlumnoService;
 import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/alumnos")
@@ -82,5 +83,19 @@ public class AlumnoController {
 
     }
 
+
+    @PutMapping("/{idAlumno}")
+    public ResponseEntity<?> update(@PathVariable int idAlumno, @RequestBody Alumno alumno){
+        try {
+            return ResponseEntity.ok(this.alumnoService.update(alumno, idAlumno));
+        }
+        catch(AlumnoNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
+        catch (AlumnoException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
+
+    }
 
 }
