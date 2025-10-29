@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
-import com.ies.daweb.persistence.entities.Alumno;
-import com.ies.daweb.service.AlumnoService;
-import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
-
 @RestController
 @RequestMapping("/alumnos")
 public class AlumnoController {
