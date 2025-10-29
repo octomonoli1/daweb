@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ies.daweb.persistence.entities.Alumno;
 import com.ies.daweb.service.AlumnoService;
@@ -84,9 +85,9 @@ public class AlumnoController {
 
     	}
     @PutMapping("/{idAlumno}")
-    public ResponseEntity<?> update(@PathVariable int idAlumno, @RequestBody Alumno alumno){
+    public ResponseEntity<?> updateMA(@PathVariable int idAlumno, @RequestBody Alumno alumno){
         try {
-            return ResponseEntity.ok(this.alumnoService.update(alumno, idAlumno));
+            return ResponseEntity.ok(this.alumnoService.updateMA(alumno, idAlumno));
         }
         catch(AlumnoNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());

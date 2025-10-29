@@ -1,20 +1,9 @@
 package com.ies.daweb.service;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.ies.daweb.persistence.entities.Alumno;
 import com.ies.daweb.persistence.repositories.AlumnoRepository;
 import com.ies.daweb.service.exceptions.AlumnoException;
 import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class AlumnoService {
@@ -22,8 +11,12 @@ public class AlumnoService {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
+    public List<Alumno> findAll(){
+        return this.alumnoRepository.findAll();
+        }
+
     public Alumno findById(int idAlumno) {
-        if(!this.alumnoRepository.existsById(idAlumno)) {
+        if(!this.alumnoRepository.existsById(idAlumno)) { //11
             throw new AlumnoNotFoundException("El alumno con id " + idAlumno +" no existe");
         }
         return this.alumnoRepository.findById(idAlumno).get();
@@ -42,6 +35,7 @@ public class AlumnoService {
         }
         alumnoRepository.deleteById(id);
     }
+    public Alumno updateMA(Alumno alumno, int idAlumno) {
 
     public Alumno createAlumno(Alumno alumno) {
         if (alumno.getName() == null || alumno.getName().trim().isEmpty()) {
