@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "alumnos")
+@Table(name = "alumno")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,12 +18,12 @@ public class Alumno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "nombre")
+    private String nombre;
 
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "apellidos")
+    private String apellidos;
 
-    @Column(name = "birth")
-    private LocalDate birth;
+    @Column(name = "FechaNacimiento")
+    private LocalDate FechaNacimiento;
 }
