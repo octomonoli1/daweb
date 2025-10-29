@@ -27,25 +27,24 @@ public class AlumnoController {
         }
     }
 
-        @DeleteMapping("/{id}")
-        public ResponseEntity<?> deleteById(@PathVariable int id){
-            try{
-                alumnoService.deleteById(id);
-                return ResponseEntity.ok("Alumno " + id + " eliminado correctamente.");
-            }catch(AlumnoNotFoundException e){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-            }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable int id) {
+        try {
+            alumnoService.deleteById(id);
+            return ResponseEntity.ok("Alumno " + id + " eliminado correctamente.");
+        } catch (AlumnoNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
 
-        @PostMapping
-    	public ResponseEntity<?> create(@RequestBody Alumno alumno) {
-            try{
-                return ResponseEntity.status(HttpStatus.CREATED).body(this.alumnoService.create(alumno));
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-            }
-
-    	}
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody Alumno alumno) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(this.alumnoService.create(alumno));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable int id) {
@@ -55,5 +54,5 @@ public class AlumnoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
 }
+
