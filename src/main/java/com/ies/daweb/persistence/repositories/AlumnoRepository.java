@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface AlumnoRepository extends ListCrudRepository<Alumno, Integer> {
     List<Alumno> findById (int idAlumno);
+    List<Alumno> findByName(String name);
 }

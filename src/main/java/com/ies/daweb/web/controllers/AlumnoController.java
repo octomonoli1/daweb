@@ -58,5 +58,14 @@ public class AlumnoController {
         }
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<?> findByName(@RequestParam String name){
+        try{
+            return ResponseEntity.ok(this.alumnoService.findByName(name));
+        }catch (AlumnoNotFoundException ex){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
+    }
+
 }
 

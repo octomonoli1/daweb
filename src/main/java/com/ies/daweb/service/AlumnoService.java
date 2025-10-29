@@ -50,4 +50,13 @@ public class AlumnoService {
             throw new AlumnoNotFoundException("No se encuentra el alumno asignado");
         }
     }
+
+    public List<Alumno> findByName(String name){
+        List<Alumno> alumnos = this.alumnoRepository.findByName(name);
+        if(alumnos.isEmpty()){
+              throw new AlumnoNotFoundException("No se ha encontrado ningun alumno con este nombre");
+        }else{
+            return this.alumnoRepository.findByName(name);
+        }
+    }
 }
