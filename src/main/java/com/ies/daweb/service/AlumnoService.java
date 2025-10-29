@@ -29,7 +29,7 @@ public class AlumnoService {
     }
     
     public Alumno create(Alumno alumno) {
-    	if (alumno.getFechaNacimiento().isAfter(LocalDate.now())) {
+    	if (alumno.getBirth().isAfter(LocalDate.now())) {
 			throw new AlumnoException("La fecha de Nacimiento debe ser anterior a la de hoy");
 		}
     	return this.alumnoRepository.save(alumno);
