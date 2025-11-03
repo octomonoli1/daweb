@@ -44,4 +44,30 @@ public class AlumnoService {
 
         return alumnoRepository.save(alumno);
     }
+    public Alumno findById(int idAlumno) {
+        if (!this.alumnoRepository.existsById(idAlumno)) { //11
+            throw new AlumnoNotFoundException("El alumno con id " + idAlumno + " no existe");
+        }
+        return this.alumnoRepository.findById(idAlumno).get();
+    }
+
+    public Alumno updateMA(Alumno alumno, int idAlumno) {
+        if (alumno.getId() != idAlumno) {
+            throw new AlumnoException("Los ids no coinciden");
+        }
+        if (!this.alumnoRepository.existsById(idAlumno)) {
+            throw new AlumnoNotFoundException("El alumno con id " + idAlumno + " no existe");
+        }
+        if (alumno.getBirth() != null) {
+            throw new AlumnoException("No se puede modificar la fecha de cumpleaños.");
+        }
+
+        Alumno alumnoBD = this.findById(idAlumno);
+        alumnoBD.setName(alumno.getName());
+        alumnoBD.setSurname(alumno.getSurname());
+
+
+        return this.alumnoRepository.save(alumnoBD);
+
+    }
 }
