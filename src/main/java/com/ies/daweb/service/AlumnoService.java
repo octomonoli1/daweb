@@ -1,15 +1,14 @@
 package com.ies.daweb.service;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.ies.daweb.persistence.entities.Alumno;
 import com.ies.daweb.persistence.repositories.AlumnoRepository;
 import com.ies.daweb.service.exceptions.AlumnoException;
 import com.ies.daweb.service.exceptions.AlumnoNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class AlumnoService {
@@ -41,11 +40,23 @@ public class AlumnoService {
         if (alumno.getBirth().isAfter(LocalDate.now())) {
             throw new AlumnoException("La fecha de nacimiento debe ser anterior a la fecha actual.");
         }
+        return alumnoRepository.save(alumno);
+    }
 
-    public Alumno findById(int id){
-        if(!this.alumnoRepository.existsById(id)){
-            throw new AlumnoNotFoundException("El id " + id + "no pertenece a ningun alumno");
+    public List<Alumno> findById(int idAlumno) {
+        if (this.alumnoRepository.existsById(idAlumno)) {
+            return this.alumnoRepository.findById(idAlumno);
+        }else {
+            throw new AlumnoNotFoundException("No se encuentra el alumno asignado");
         }
-       return this.alumnoRepository.findById(id).get();
+    }
+
+    public List<Alumno> findByName(String name){
+        List<Alumno> alumnos = this.alumnoRepository.findByName(name);
+        if(alumnos.isEmpty()){
+              throw new AlumnoNotFoundException("No se ha encontrado ningun alumno con este nombre");
+        }else{
+            return this.alumnoRepository.findByName(name);
+        }
     }
 }
